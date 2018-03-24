@@ -30,14 +30,14 @@ module objects {
       this.planeFlash.on("animationend", this._animationEnded.bind(this), false);
       switch (managers.Game.currentScene) {
         case config.Scene.PLAY:
-      this.x = 320;
-      this.y = 430;
-      break;
-      case config.Scene.LEVEL2:
-      this.rotation=90;
-      this.x = 40;
-      this.y = 220;
-      break;
+          this.x = 320;
+          this.y = 430;
+          break;
+        case config.Scene.LEVEL2:
+          this.rotation = 90;
+          this.x = 40;
+          this.y = 240;
+          break;
       }
     }
 
@@ -55,9 +55,15 @@ module objects {
     // move the object to some new location
     public Move(): void {
       switch (managers.Game.currentScene) {
-        // mouse controls
         case config.Scene.LEVEL2:
-          // this.x = objects.Game.stage.mouseX;
+          if (managers.Game.keyboardManager.moveForward) {
+            this.y -= 5;
+          }
+
+          else if (managers.Game.keyboardManager.moveBackward) {
+            this.y += 5;
+          }
+
           break;
         // keyboard controls
         case config.Scene.PLAY:
@@ -65,7 +71,7 @@ module objects {
             this.x -= 5;
           }
 
-          if (managers.Game.keyboardManager.moveRight) {
+          else if (managers.Game.keyboardManager.moveRight) {
             this.x += 5;
           }
           break;
@@ -82,10 +88,17 @@ module objects {
       if (this.x >= 640 - this.halfWidth) {
         this.x = 640 - this.halfWidth;
       }
-
       // left boundary
-      if (this.x <= this.halfWidth) {
+      else if (this.x <= this.halfWidth) {
         this.x = this.halfWidth;
+      }
+      // right boundary
+      else if (this.y >= 480 - this.halfWidth) {
+        this.y = 480 - this.halfWidth;
+      }
+      // left boundary
+      else if (this.y <= this.halfWidth) {
+        this.y = this.halfWidth;
       }
     }
   }

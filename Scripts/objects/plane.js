@@ -40,7 +40,7 @@ var objects;
                 case config.Scene.LEVEL2:
                     this.rotation = 90;
                     this.x = 40;
-                    this.y = 220;
+                    this.y = 240;
                     break;
             }
         };
@@ -55,16 +55,20 @@ var objects;
         // move the object to some new location
         Plane.prototype.Move = function () {
             switch (managers.Game.currentScene) {
-                // mouse controls
                 case config.Scene.LEVEL2:
-                    // this.x = objects.Game.stage.mouseX;
+                    if (managers.Game.keyboardManager.moveForward) {
+                        this.y -= 5;
+                    }
+                    else if (managers.Game.keyboardManager.moveBackward) {
+                        this.y += 5;
+                    }
                     break;
                 // keyboard controls
                 case config.Scene.PLAY:
                     if (managers.Game.keyboardManager.moveLeft) {
                         this.x -= 5;
                     }
-                    if (managers.Game.keyboardManager.moveRight) {
+                    else if (managers.Game.keyboardManager.moveRight) {
                         this.x += 5;
                     }
                     break;
@@ -78,9 +82,14 @@ var objects;
             if (this.x >= 640 - this.halfWidth) {
                 this.x = 640 - this.halfWidth;
             }
-            // left boundary
-            if (this.x <= this.halfWidth) {
+            else if (this.x <= this.halfWidth) {
                 this.x = this.halfWidth;
+            }
+            else if (this.y >= 480 - this.halfWidth) {
+                this.y = 480 - this.halfWidth;
+            }
+            else if (this.y <= this.halfWidth) {
+                this.y = this.halfWidth;
             }
         };
         return Plane;
