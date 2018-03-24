@@ -39,8 +39,8 @@ var scenes;
             this._engineSound.loop = -1; // play forever
             this._engineSound.volume = 0.3;
             // create the scoreboard UI for the Scene
-            this._scoreBoard = new managers.ScoreBoard();
-            managers.Game.scoreBoard = this._scoreBoard;
+            this._scoreBoard = managers.Game.scoreBoard; /*new managers.ScoreBoard();
+            managers.Game.scoreBoard = this._scoreBoard;*/
             this.Main();
         };
         // triggered every frame

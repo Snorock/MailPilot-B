@@ -6,7 +6,7 @@ module scenes {
     private _island: objects.Island;
     private _clouds: objects.Cloud[];
     private _cloudNum: number;
-    private _scoreBoard: managers.ScoreBoard;
+    public _scoreBoard: managers.ScoreBoard;
 
     private _engineSound: createjs.AbstractSoundInstance;
     private _coin: objects.Coin;
@@ -48,8 +48,8 @@ module scenes {
       this._engineSound.volume = 0.3;
 
       // create the scoreboard UI for the Scene
-      this._scoreBoard = new managers.ScoreBoard();
-      managers.Game.scoreBoard = this._scoreBoard;
+      this._scoreBoard = managers.Game.scoreBoard; /*new managers.ScoreBoard();
+      managers.Game.scoreBoard = this._scoreBoard;*/
 
       this.Main();
     }

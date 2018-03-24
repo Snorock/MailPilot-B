@@ -31,6 +31,9 @@ var objects;
             if (this.y > (480 + this.height)) {
                 this.alpha = 1;
             }
+            else if (this.x < (0 - this.halfWidth)) {
+                this.alpha = 1;
+            }
         };
         return Coin;
     }(objects.GameObject));

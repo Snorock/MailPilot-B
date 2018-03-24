@@ -6,7 +6,7 @@ module scenes {
     private _island: objects.Island;
     private _clouds: objects.Cloud[];
     private _cloudNum: number;
-    private _scoreBoard: managers.ScoreBoard;
+    public _scoreBoard: managers.ScoreBoard;
 
     private _engineSound: createjs.AbstractSoundInstance;
     private _coin: objects.Coin;
