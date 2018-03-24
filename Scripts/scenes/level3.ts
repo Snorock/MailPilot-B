@@ -1,5 +1,5 @@
 module scenes {
-  export class PlayScene extends objects.Scene {
+  export class Level3 extends objects.Scene {
     // Private Instance Variables
     private _ocean: objects.Ocean;
     private _plane: objects.Plane;
@@ -37,7 +37,7 @@ module scenes {
 
       // instantiate the cloud array
       this._clouds = new Array<objects.Cloud>();
-      this._cloudNum = 1;
+      this._cloudNum = 3;
       // loop and add each cloud to the array
       for (let count = 0; count < this._cloudNum; count++) {
         this._clouds[count] = new objects.Cloud();
@@ -48,8 +48,7 @@ module scenes {
       this._engineSound.volume = 0.3;
 
       // create the scoreboard UI for the Scene
-      this._scoreBoard = new managers.ScoreBoard();
-      managers.Game.scoreBoard = this._scoreBoard;
+      this._scoreBoard = managers.Game.scoreBoard; 
 
       this.Main();
     }
@@ -66,12 +65,7 @@ module scenes {
       this._island.Update();
 
       // check collision between plane and coin
-      if(managers.Collision.Check(this._plane, this._coin)){
-        if(this._scoreBoard.Score>= 500){
-          this._engineSound.stop();
-          managers.Game.currentScene = config.Scene.LEVEL2;
-        }
-      }
+      managers.Collision.Check(this._plane, this._coin);
 
       this._clouds.forEach(cloud => {
         cloud.Update();

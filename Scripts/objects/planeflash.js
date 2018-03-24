@@ -20,6 +20,9 @@ var objects;
             if (managers.Game.currentScene == config.Scene.LEVEL2) {
                 _this.rotation = 90;
             }
+            else if (managers.Game.currentScene == config.Scene.LEVEL3) {
+                _this.rotation = -90;
+            }
             else {
                 _this.rotation = 0;
             }

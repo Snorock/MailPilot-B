@@ -48,9 +48,7 @@ module scenes {
       this._engineSound.volume = 0.3;
 
       // create the scoreboard UI for the Scene
-      this._scoreBoard = managers.Game.scoreBoard; /*new managers.ScoreBoard();
-      managers.Game.scoreBoard = this._scoreBoard;*/
-
+      this._scoreBoard = managers.Game.scoreBoard; 
       this.Main();
     }
 
@@ -66,7 +64,12 @@ module scenes {
       this._island.Update();
 
       // check collision between plane and coin
-      managers.Collision.Check(this._plane, this._coin);
+      if(managers.Collision.Check(this._plane, this._coin)){
+        if(this._scoreBoard.Score>= 1000){
+          this._engineSound.stop();
+          managers.Game.currentScene = config.Scene.LEVEL3;
+        }
+      }
 
       this._clouds.forEach(cloud => {
         cloud.Update();

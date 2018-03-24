@@ -10,11 +10,11 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var scenes;
 (function (scenes) {
-    var PlayScene = /** @class */ (function (_super) {
-        __extends(PlayScene, _super);
+    var Level3 = /** @class */ (function (_super) {
+        __extends(Level3, _super);
         // Public Properties
         // Constructor
-        function PlayScene() {
+        function Level3() {
             var _this = _super.call(this) || this;
             _this.Start();
             return _this;
@@ -22,7 +22,7 @@ var scenes;
         // Private Mathods
         // Public Methods
         // Initialize Game Variables and objects
-        PlayScene.prototype.Start = function () {
+        Level3.prototype.Start = function () {
             this._ocean = new objects.Ocean();
             this._plane = new objects.Plane();
             managers.Game.plane = this._plane;
@@ -30,7 +30,7 @@ var scenes;
             this._island = new objects.Island();
             // instantiate the cloud array
             this._clouds = new Array();
-            this._cloudNum = 1;
+            this._cloudNum = 3;
             // loop and add each cloud to the array
             for (var count = 0; count < this._cloudNum; count++) {
                 this._clouds[count] = new objects.Cloud();
@@ -39,12 +39,11 @@ var scenes;
             this._engineSound.loop = -1; // play forever
             this._engineSound.volume = 0.3;
             // create the scoreboard UI for the Scene
-            this._scoreBoard = new managers.ScoreBoard();
-            managers.Game.scoreBoard = this._scoreBoard;
+            this._scoreBoard = managers.Game.scoreBoard;
             this.Main();
         };
         // triggered every frame
-        PlayScene.prototype.Update = function () {
+        Level3.prototype.Update = function () {
             var _this = this;
             this._ocean.Update();
             this._plane.Update();
@@ -53,12 +52,7 @@ var scenes;
             this._coin.Update();
             this._island.Update();
             // check collision between plane and coin
-            if (managers.Collision.Check(this._plane, this._coin)) {
-                if (this._scoreBoard.Score >= 500) {
-                    this._engineSound.stop();
-                    managers.Game.currentScene = config.Scene.LEVEL2;
-                }
-            }
+            managers.Collision.Check(this._plane, this._coin);
             this._clouds.forEach(function (cloud) {
                 cloud.Update();
                 // check collision between plane and current cloud
@@ -71,7 +65,7 @@ var scenes;
             }
         };
         // This is where the fun happens
-        PlayScene.prototype.Main = function () {
+        Level3.prototype.Main = function () {
             var _this = this;
             // add the ocean to the scene
             this.addChild(this._ocean);
@@ -90,8 +84,8 @@ var scenes;
             this.addChild(this._scoreBoard.LivesLabel);
             this.addChild(this._scoreBoard.ScoreLabel);
         };
-        return PlayScene;
+        return Level3;
     }(objects.Scene));
-    scenes.PlayScene = PlayScene;
+    scenes.Level3 = Level3;
 })(scenes || (scenes = {}));
-//# sourceMappingURL=play.js.map
+//# sourceMappingURL=level3.js.map

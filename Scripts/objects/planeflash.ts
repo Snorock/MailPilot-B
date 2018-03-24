@@ -10,6 +10,9 @@ module objects {
       if(managers.Game.currentScene == config.Scene.LEVEL2){
         this.rotation = 90;
       }
+      else  if(managers.Game.currentScene == config.Scene.LEVEL3){
+        this.rotation = -90;
+      }
       else {
         this.rotation = 0;
       }

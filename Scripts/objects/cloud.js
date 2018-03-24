@@ -46,6 +46,12 @@ var objects;
                     this._dx = -Math.floor((Math.random() * 5) + 5);
                     this._dy = Math.floor((Math.random() * 4) - 2);
                     break;
+                case config.Scene.LEVEL3:
+                    this.x = -this.halfWidth;
+                    this.y = Math.floor((Math.random() * (480 - this.height)) + this.halfWidth);
+                    this._dx = Math.floor((Math.random() * 5) + 5);
+                    this._dy = Math.floor((Math.random() * 4) - 2);
+                    break;
             }
         };
         // move the object to some new location
@@ -56,10 +62,13 @@ var objects;
         // check to see if some boundary has been passed
         Cloud.prototype.CheckBounds = function () {
             // check lower bounds
-            if (this.y >= 480 + this.height) {
+            if (this.y > 480 + this.height) {
                 this.Reset();
             }
-            else if (this.x <= -this.width) {
+            else if (this.x < -this.width) {
+                this.Reset();
+            }
+            else if (this.x > 640 + this.width) {
                 this.Reset();
             }
         };

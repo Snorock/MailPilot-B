@@ -24,6 +24,10 @@ module objects {
           this.x = 1440;
           this.rotation = 90;
           break;
+        case config.Scene.LEVEL3:
+          this.x = 640;
+          this.rotation = 90;
+          break;
       }
     }
 
@@ -36,6 +40,9 @@ module objects {
         case config.Scene.LEVEL2:
           this.x -= this._dy;
           break;
+        case config.Scene.LEVEL3:
+          this.x += this._dy;
+          break;
       }
     }
 
@@ -44,6 +51,8 @@ module objects {
       if (managers.Game.currentScene == config.Scene.PLAY && this.y >= 0) {
         this._reset();
       } else if (managers.Game.currentScene == config.Scene.LEVEL2 && this.x <= 640) {
+        this._reset();
+      } else if (managers.Game.currentScene == config.Scene.LEVEL3 && this.x >= 1440) {
         this._reset();
       }
     }

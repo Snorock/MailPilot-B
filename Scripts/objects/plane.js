@@ -42,6 +42,11 @@ var objects;
                     this.x = 40;
                     this.y = 240;
                     break;
+                case config.Scene.LEVEL3:
+                    this.rotation = -90;
+                    this.x = 600;
+                    this.y = 240;
+                    break;
             }
         };
         // updates the game object every frame
@@ -55,6 +60,7 @@ var objects;
         // move the object to some new location
         Plane.prototype.Move = function () {
             switch (managers.Game.currentScene) {
+                case config.Scene.LEVEL3:
                 case config.Scene.LEVEL2:
                     if (managers.Game.keyboardManager.moveForward) {
                         this.y -= 5;

@@ -31,6 +31,10 @@ var objects;
                     this.x = 1440;
                     this.rotation = 90;
                     break;
+                case config.Scene.LEVEL3:
+                    this.x = 640;
+                    this.rotation = 90;
+                    break;
             }
         };
         // move the object to some new location
@@ -42,6 +46,9 @@ var objects;
                 case config.Scene.LEVEL2:
                     this.x -= this._dy;
                     break;
+                case config.Scene.LEVEL3:
+                    this.x += this._dy;
+                    break;
             }
         };
         // check to see if some boundary has been passed
@@ -50,6 +57,9 @@ var objects;
                 this._reset();
             }
             else if (managers.Game.currentScene == config.Scene.LEVEL2 && this.x <= 640) {
+                this._reset();
+            }
+            else if (managers.Game.currentScene == config.Scene.LEVEL3 && this.x >= 1440) {
                 this._reset();
             }
         };
