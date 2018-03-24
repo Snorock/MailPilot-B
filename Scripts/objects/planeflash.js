@@ -16,7 +16,14 @@ var objects;
         // public properties
         // constructors
         function PlaneFlash() {
-            return _super.call(this, "planeflash") || this;
+            var _this = _super.call(this, "planeflash") || this;
+            if (managers.Game.currentScene == config.Scene.LEVEL2) {
+                _this.rotation = 90;
+            }
+            else {
+                _this.rotation = 0;
+            }
+            return _this;
         }
         // private methods
         // public methods

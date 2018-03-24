@@ -7,6 +7,12 @@ module objects {
     // constructors
     constructor() {
       super("planeflash");
+      if(managers.Game.currentScene == config.Scene.LEVEL2){
+        this.rotation = 90;
+      }
+      else {
+        this.rotation = 0;
+      }
     }
 
     // private methods

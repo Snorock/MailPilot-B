@@ -22,15 +22,34 @@ var objects;
         // private methods
         // reset the objects location to some value
         Ocean.prototype._reset = function () {
-            this.y = -960;
+            switch (managers.Game.currentScene) {
+                case config.Scene.PLAY:
+                    this.y = -960;
+                    this.rotation = 0;
+                    break;
+                case config.Scene.LEVEL2:
+                    this.x = 1440;
+                    this.rotation = 90;
+                    break;
+            }
         };
         // move the object to some new location
         Ocean.prototype._move = function () {
-            this.y += this._dy;
+            switch (managers.Game.currentScene) {
+                case config.Scene.PLAY:
+                    this.y += this._dy;
+                    break;
+                case config.Scene.LEVEL2:
+                    this.x -= this._dy;
+                    break;
+            }
         };
         // check to see if some boundary has been passed
         Ocean.prototype._checkBounds = function () {
-            if (this.y >= 0) {
+            if (managers.Game.currentScene == config.Scene.PLAY && this.y >= 0) {
+                this._reset();
+            }
+            else if (managers.Game.currentScene == config.Scene.LEVEL2 && this.x <= 640) {
                 this._reset();
             }
         };
