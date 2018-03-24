@@ -34,17 +34,35 @@ var objects;
         };
         // reset the objects location to some value
         Island.prototype.Reset = function () {
-            this.x = Math.floor((Math.random() * (640 - this.width)) + this.halfWidth);
-            this.y = -this.height;
+            switch (managers.Game.currentScene) {
+                case config.Scene.PLAY:
+                    this.x = Math.floor((Math.random() * (640 - this.width)) + this.halfWidth);
+                    this.y = -this.height;
+                    break;
+                case config.Scene.LEVEL2:
+                    this.x = 640 + this.width;
+                    this.y = Math.floor((Math.random() * (480 - this.height)) + this.halfHeight);
+                    break;
+            }
         };
         // move the object to some new location
         Island.prototype.Move = function () {
-            this.y += this._dy;
+            switch (managers.Game.currentScene) {
+                case config.Scene.PLAY:
+                    this.y += this._dy;
+                    break;
+                case config.Scene.LEVEL2:
+                    this.x -= this._dy;
+                    break;
+            }
         };
         // check to see if some boundary has been passed
         Island.prototype.CheckBounds = function () {
             // check lower bounds
             if (this.y >= 480 + this.height) {
+                this.Reset();
+            }
+            else if (this.x <= 0 - this.halfWidth) {
                 this.Reset();
             }
         };
