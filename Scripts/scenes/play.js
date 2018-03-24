@@ -53,7 +53,12 @@ var scenes;
             this._coin.Update();
             this._island.Update();
             // check collision between plane and coin
-            managers.Collision.Check(this._plane, this._coin);
+            if (managers.Collision.Check(this._plane, this._coin)) {
+                if (this._scoreBoard.Score >= 500) {
+                    //this._engineSound.stop();
+                    managers.Game.currentScene = config.Scene.LEVEL2;
+                }
+            }
             this._clouds.forEach(function (cloud) {
                 cloud.Update();
                 // check collision between plane and current cloud

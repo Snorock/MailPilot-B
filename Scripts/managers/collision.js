@@ -41,10 +41,12 @@ var managers;
                             }
                             break;
                     }
+                    return true;
                 }
             }
             else {
                 object2.isColliding = false;
+                return false;
             }
         };
         return Collision;

@@ -1,7 +1,7 @@
 module managers {
   export class Collision {
 
-    public static Check(object1: objects.GameObject, object2: objects.GameObject) {
+    public static Check(object1: objects.GameObject, object2: objects.GameObject) : boolean {
       // create two vec2 objects
       let P1: math.Vec2 = new math.Vec2(object1.x, object1.y);
       let P2: math.Vec2 = new math.Vec2(object2.x, object2.y);
@@ -45,10 +45,12 @@ module managers {
 
               break;
           }
+          return true;
         }
       }
       else {
         object2.isColliding = false;
+        return false;
       }
     }
   }

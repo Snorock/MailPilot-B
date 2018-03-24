@@ -28,11 +28,21 @@ var objects;
         // public methods
         // Initializes variables and creates new objects
         Plane.prototype.Start = function () {
+            //switch()
             this.planeFlash = new objects.PlaneFlash();
             this.planeFlash.alpha = 1;
             this.planeFlash.on("animationend", this._animationEnded.bind(this), false);
-            this.x = 320;
-            this.y = 430;
+            switch (managers.Game.currentScene) {
+                case config.Scene.PLAY:
+                    this.x = 320;
+                    this.y = 430;
+                    break;
+                case config.Scene.LEVEL2:
+                    this.rotation = 90;
+                    this.x = 40;
+                    this.y = 220;
+                    break;
+            }
         };
         // updates the game object every frame
         Plane.prototype.Update = function () {
@@ -44,14 +54,20 @@ var objects;
         };
         // move the object to some new location
         Plane.prototype.Move = function () {
-            // mouse controls
-            // this.x = objects.Game.stage.mouseX;
-            // keyboard controls
-            if (managers.Game.keyboardManager.moveLeft) {
-                this.x -= 5;
-            }
-            if (managers.Game.keyboardManager.moveRight) {
-                this.x += 5;
+            switch (managers.Game.currentScene) {
+                // mouse controls
+                case config.Scene.LEVEL2:
+                    // this.x = objects.Game.stage.mouseX;
+                    break;
+                // keyboard controls
+                case config.Scene.PLAY:
+                    if (managers.Game.keyboardManager.moveLeft) {
+                        this.x -= 5;
+                    }
+                    if (managers.Game.keyboardManager.moveRight) {
+                        this.x += 5;
+                    }
+                    break;
             }
             this.planeFlash.x = this.x;
             this.planeFlash.y = this.y;
